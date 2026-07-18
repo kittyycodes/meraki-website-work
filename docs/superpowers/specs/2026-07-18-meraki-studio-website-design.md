@@ -126,8 +126,13 @@ and the Terms & Conditions body text.
 
 ## Non-Functional
 
-- **Responsive**: mobile-first; all grids reflow to single/double column
-  on small screens; clientele strip keeps scrolling horizontally
+- **Responsive**: mobile and laptop/desktop are both primary targets (not
+  a desktop site with mobile as an afterthought, or vice versa) — built
+  mobile-first, with layouts, nav, and grids explicitly designed and
+  checked at both a phone width (~375px) and a laptop width (~1440px), plus
+  the tablet range in between. All grids reflow to single/double column on
+  small screens; clientele strip keeps scrolling horizontally at every
+  width.
 - **Accessibility**: sufficient contrast in both themes against the locked
   palette, semantic HTML landmarks, alt text on all images/logos,
   keyboard-navigable nav and theme toggle

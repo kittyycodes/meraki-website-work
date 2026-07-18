@@ -43,5 +43,7 @@ describe('AdSlot', () => {
     getActiveAdCampaignMock.mockResolvedValueOnce(null)
     render(<AdSlot />)
     await waitFor(() => expect(screen.getByTestId('ad-slot-adsense')).toBeInTheDocument())
+    expect(screen.getByTestId('ad-slot-adsense')).toHaveAttribute('data-ad-client', 'ca-pub-123')
+    expect(screen.getByTestId('ad-slot-adsense')).toHaveAttribute('data-ad-slot', 'slot-456')
   })
 })

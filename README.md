@@ -1,0 +1,34 @@
+### requirements
+- [ ] dark mode/light mode (toggle)
+- [ ] sections: -
+	- [ ] about
+	- [ ] services: 
+		- [ ] recording
+		- [ ] music production
+		- [ ] mixing and mastering
+		- [ ] audio books productions
+		- [ ] music distribution and publishing
+	- [ ] google ads sections
+	- [ ] teams (members) 
+		- [ ] about the team members
+		- [ ] social links
+	- [ ] studio sections:- 
+		- [ ] studio images
+		- [ ] equipments
+	- [ ] clientele 
+	- [ ] our works
+		- [ ] famous celebrity images works
+	- [ ] terms and conditions
+	- [ ] contact us: -
+		- [ ] address
+		- [ ] phone number
+		- [ ] email
+		- [ ] maps (google)
+		- [ ] book now - whatsapp link 
+
+### points to remember: -
+- no pricing mentions
+- color scheme - studio shade (brown, warm yellow)
+- present hyperlinks
+- minimalistic 
+- work oriented and professional looking

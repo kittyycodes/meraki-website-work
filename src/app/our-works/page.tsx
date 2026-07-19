@@ -12,9 +12,13 @@ export default function OurWorksPage() {
 
   useEffect(() => {
     let cancelled = false
-    getWorkSamples().then((result) => {
-      if (!cancelled) setWorks(result)
-    })
+    getWorkSamples()
+      .then((result) => {
+        if (!cancelled) setWorks(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch work samples', error)
+      })
     return () => {
       cancelled = true
     }

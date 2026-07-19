@@ -10,9 +10,13 @@ export function WorksTeaser() {
 
   useEffect(() => {
     let cancelled = false
-    getFeaturedWorkSamples().then((result) => {
-      if (!cancelled) setWorks(result)
-    })
+    getFeaturedWorkSamples()
+      .then((result) => {
+        if (!cancelled) setWorks(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch featured work samples', error)
+      })
     return () => {
       cancelled = true
     }

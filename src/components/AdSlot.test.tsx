@@ -46,4 +46,20 @@ describe('AdSlot', () => {
     expect(screen.getByTestId('ad-slot-adsense')).toHaveAttribute('data-ad-client', 'ca-pub-123')
     expect(screen.getByTestId('ad-slot-adsense')).toHaveAttribute('data-ad-slot', 'slot-456')
   })
+
+  it('loads the AdSense script with the configured client id when AdSense is configured', async () => {
+    vi.stubEnv('NEXT_PUBLIC_ADSENSE_CLIENT_ID', 'ca-pub-123')
+    vi.stubEnv('NEXT_PUBLIC_ADSENSE_SLOT_ID', 'slot-456')
+    getActiveAdCampaignMock.mockResolvedValueOnce(null)
+    render(<AdSlot />)
+    await waitFor(() => expect(screen.getByTestId('ad-slot-adsense')).toBeInTheDocument())
+
+    const script = await waitFor(() => {
+      const el = document.querySelector('script[src*="pagead2.googlesyndication.com"]')
+      expect(el).not.toBeNull()
+      return el as HTMLScriptElement
+    })
+    expect(script.src).toBe('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-123')
+    expect(script.crossOrigin).toBe('anonymous')
+  })
 })

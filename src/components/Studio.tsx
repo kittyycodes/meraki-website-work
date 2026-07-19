@@ -11,12 +11,20 @@ export function Studio() {
 
   useEffect(() => {
     let cancelled = false
-    getStudioPhotos().then((result) => {
-      if (!cancelled) setPhotos(result)
-    })
-    getEquipment().then((result) => {
-      if (!cancelled) setEquipment(result)
-    })
+    getStudioPhotos()
+      .then((result) => {
+        if (!cancelled) setPhotos(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch studio photos', error)
+      })
+    getEquipment()
+      .then((result) => {
+        if (!cancelled) setEquipment(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch equipment', error)
+      })
     return () => {
       cancelled = true
     }

@@ -9,9 +9,13 @@ export function Clientele() {
 
   useEffect(() => {
     let cancelled = false
-    getClientLogos().then((result) => {
-      if (!cancelled) setLogos(result)
-    })
+    getClientLogos()
+      .then((result) => {
+        if (!cancelled) setLogos(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch client logos', error)
+      })
     return () => {
       cancelled = true
     }

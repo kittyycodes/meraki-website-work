@@ -11,9 +11,13 @@ export default function TermsPage() {
 
   useEffect(() => {
     let cancelled = false
-    getSiteSettings().then((result) => {
-      if (!cancelled) setTermsText(result.termsText)
-    })
+    getSiteSettings()
+      .then((result) => {
+        if (!cancelled) setTermsText(result.termsText)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch site settings', error)
+      })
     return () => {
       cancelled = true
     }

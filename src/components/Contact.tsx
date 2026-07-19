@@ -18,9 +18,13 @@ export function Contact() {
 
   useEffect(() => {
     let cancelled = false
-    getSiteSettings().then((result) => {
-      if (!cancelled) setSettings(result)
-    })
+    getSiteSettings()
+      .then((result) => {
+        if (!cancelled) setSettings(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch site settings', error)
+      })
     return () => {
       cancelled = true
     }

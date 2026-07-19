@@ -9,9 +9,13 @@ export function Team() {
 
   useEffect(() => {
     let cancelled = false
-    getTeamMembers().then((result) => {
-      if (!cancelled) setMembers(result)
-    })
+    getTeamMembers()
+      .then((result) => {
+        if (!cancelled) setMembers(result)
+      })
+      .catch((error) => {
+        if (!cancelled) console.error('Failed to fetch team members', error)
+      })
     return () => {
       cancelled = true
     }

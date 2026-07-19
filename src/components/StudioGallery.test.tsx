@@ -19,5 +19,14 @@ describe('StudioGallery', () => {
 
     fireEvent.click(lightbox)
     expect(screen.queryByTestId('gallery-lightbox')).not.toBeInTheDocument()
+
+    // Verify clicking a different thumbnail shows the correct photo (not hardcoded to first)
+    fireEvent.click(screen.getByTestId('gallery-thumb-b'))
+    const lightbox2 = screen.getByTestId('gallery-lightbox')
+    expect(lightbox2).toBeInTheDocument()
+    expect(screen.getByAltText('Booth')).toHaveAttribute('src', 'b.jpg')
+
+    fireEvent.click(lightbox2)
+    expect(screen.queryByTestId('gallery-lightbox')).not.toBeInTheDocument()
   })
 })

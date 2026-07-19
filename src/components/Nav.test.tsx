@@ -1,5 +1,5 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { ThemeProvider } from '@/context/ThemeContext'
 import { Nav } from './Nav'
 
@@ -11,10 +11,6 @@ beforeEach(() => {
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
   }))
-})
-
-afterEach(() => {
-  cleanup()
 })
 
 function renderNav() {

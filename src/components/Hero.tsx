@@ -16,7 +16,7 @@ export function Hero() {
         </a>
         <a
           href="/our-works"
-          className="border-2 border-sofa-blue dark:border-sofa-blue-dark text-sofa-blue dark:text-sofa-blue-dark px-6 py-3 rounded-lg font-semibold"
+          className="border-2 border-sofa-blue dark:border-sofa-blue-dark text-espresso dark:text-sofa-blue-dark px-6 py-3 rounded-lg font-semibold"
         >
           Our Works
         </a>

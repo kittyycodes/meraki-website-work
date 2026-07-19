@@ -9,7 +9,12 @@ export function StudioGallery({ photos }: { photos: StudioPhoto[] }) {
     <div>
       <div className="grid grid-cols-2 gap-4" data-testid="studio-gallery-grid">
         {photos.map((photo) => (
-          <button key={photo._id} onClick={() => setActivePhoto(photo)} data-testid={`gallery-thumb-${photo._id}`}>
+          <button
+            key={photo._id}
+            onClick={() => setActivePhoto(photo)}
+            data-testid={`gallery-thumb-${photo._id}`}
+            className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-sofa-blue dark:focus-visible:outline-sofa-blue-dark"
+          >
             <img src={photo.imageUrl} alt="" className="w-full h-40 object-cover rounded" />
           </button>
         ))}

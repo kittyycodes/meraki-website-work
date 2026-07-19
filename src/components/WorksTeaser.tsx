@@ -26,7 +26,7 @@ export function WorksTeaser() {
           <WorkSampleCard key={work._id} work={work} />
         ))}
       </div>
-      <a href="/our-works" className={`${LINK_CLASS} block mt-6`}>
+      <a href="/our-works" className={`${LINK_CLASS} text-espresso dark:text-ivory block mt-6`}>
         View All Works
       </a>
     </section>

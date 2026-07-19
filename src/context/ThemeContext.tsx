@@ -11,23 +11,29 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
 const STORAGE_KEY = 'meraki-theme'
 
-function getStoredOrSystemTheme(): Theme {
-  const stored = window.localStorage.getItem(STORAGE_KEY)
-  if (stored === 'light' || stored === 'dark') return stored
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+function getInitialTheme(): Theme {
+  // A blocking inline script in the root layout (src/app/layout.tsx) runs
+  // before hydration and applies the `dark` class to <html> based on the
+  // stored preference (falling back to system preference). Reading that
+  // class here — rather than re-reading localStorage/matchMedia — keeps
+  // this component's state in sync with what has already been painted, so
+  // there is no post-mount flash of the wrong theme.
+  //
+  // During SSR/static export `document` is unavailable, so this falls back
+  // to 'light' to match the server-rendered markup. That produces a
+  // one-render mismatch on theme-dependent UI (e.g. the theme toggle icon)
+  // for dark-preference visitors, which is expected and suppressed via
+  // `suppressHydrationWarning` on that element.
+  if (typeof document === 'undefined') return 'light'
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Always start at 'light' so the client's first render matches the
-  // server-rendered markup (window/localStorage/matchMedia are unavailable
-  // during SSR). The real theme is resolved right after mount below, which
-  // avoids a React hydration mismatch.
-  const [theme, setTheme] = useState<Theme>('light')
+  const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
-  useEffect(() => {
-    setTheme(getStoredOrSystemTheme())
-  }, [])
-
+  // Applies the class/localStorage side effects when `theme` changes,
+  // including in response to the user manually toggling. Running on mount
+  // too is harmless (the class already matches, from the blocking script).
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
     window.localStorage.setItem(STORAGE_KEY, theme)

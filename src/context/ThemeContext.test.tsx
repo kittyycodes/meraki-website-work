@@ -14,6 +14,10 @@ function ThemeProbe() {
 
 beforeEach(() => {
   window.localStorage.clear()
+  // The real app relies on a blocking inline script (src/app/layout.tsx)
+  // to apply this class before ThemeProvider ever mounts. Reset it here so
+  // tests don't leak the class from a previous render/toggle.
+  document.documentElement.classList.remove('dark')
   vi.stubGlobal('matchMedia', (query: string) => ({
     matches: false,
     media: query,
@@ -23,7 +27,7 @@ beforeEach(() => {
 })
 
 describe('ThemeProvider / useTheme', () => {
-  it('defaults to the system preference when nothing is stored', () => {
+  it('defaults to light when <html> has no dark class', () => {
     render(
       <ThemeProvider>
         <ThemeProbe />
@@ -44,8 +48,14 @@ describe('ThemeProvider / useTheme', () => {
     expect(document.documentElement.classList.contains('dark')).toBe(true)
   })
 
-  it('reads a previously stored theme instead of the system preference', () => {
-    window.localStorage.setItem('meraki-theme', 'dark')
+  it('reads its initial state from the dark class already applied to <html>, instead of defaulting to light', () => {
+    // Simulates what the blocking init script in the root layout does
+    // before React hydrates: applying the `dark` class ahead of first
+    // paint/mount, based on a stored or system-preferred theme.
+    // ThemeProvider must pick this up synchronously on its very first
+    // render (no useEffect round-trip), or dark-preference visitors would
+    // see a flash of light-mode styling.
+    document.documentElement.classList.add('dark')
     render(
       <ThemeProvider>
         <ThemeProbe />

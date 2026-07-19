@@ -23,7 +23,7 @@ export function Studio() {
   }, [])
 
   return (
-    <section id="studio" className="bg-cream dark:bg-charcoal py-16 px-6">
+    <section id="studio" className="bg-cream dark:bg-charcoal py-16 px-6 scroll-mt-20">
       <h2 className="font-heading text-espresso dark:text-ivory text-2xl font-bold mb-8">The Studio</h2>
       <StudioGallery photos={photos} />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">

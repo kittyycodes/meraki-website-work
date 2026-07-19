@@ -27,7 +27,7 @@ export function Contact() {
   }, [])
 
   return (
-    <section id="contact" className="bg-cream-alt dark:bg-charcoal-alt py-16 px-6">
+    <section id="contact" className="bg-cream-alt dark:bg-charcoal-alt py-16 px-6 scroll-mt-20">
       <h2 className="font-heading text-espresso dark:text-ivory text-2xl font-bold mb-8">Contact Us</h2>
       <p className="text-text-muted-light dark:text-text-muted-dark" data-testid="contact-address">
         {settings.address}

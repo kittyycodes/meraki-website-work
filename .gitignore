@@ -1,1 +1,9 @@
 .superpowers/
+node_modules/
+.next/
+out/
+studio/dist/
+studio/.sanity/
+next-env.d.ts
+*.tsbuildinfo
+.env.local

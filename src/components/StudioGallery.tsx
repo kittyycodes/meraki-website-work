@@ -13,6 +13,7 @@ export function StudioGallery({ photos }: { photos: StudioPhoto[] }) {
             key={photo._id}
             onClick={() => setActivePhoto(photo)}
             data-testid={`gallery-thumb-${photo._id}`}
+            aria-label={photo.caption}
             className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-sofa-blue dark:focus-visible:outline-sofa-blue-dark"
           >
             <img src={photo.imageUrl} alt="" className="w-full h-40 object-cover rounded" />

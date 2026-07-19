@@ -29,4 +29,12 @@ describe('StudioGallery', () => {
     fireEvent.click(lightbox2)
     expect(screen.queryByTestId('gallery-lightbox')).not.toBeInTheDocument()
   })
+
+  it('thumbnail buttons have accessible names via aria-label', () => {
+    render(<StudioGallery photos={PHOTOS} />)
+    const controlRoomButton = screen.getByRole('button', { name: 'Control room' })
+    const boothButton = screen.getByRole('button', { name: 'Booth' })
+    expect(controlRoomButton).toBeInTheDocument()
+    expect(boothButton).toBeInTheDocument()
+  })
 })
